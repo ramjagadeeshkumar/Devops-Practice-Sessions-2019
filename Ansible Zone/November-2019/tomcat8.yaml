@@ -1,0 +1,30 @@
+- hosts: all
+  become: yes
+  tasks:
+    - name: update ubuntu packages and install open-jdk8
+      apt_repository:
+        repo: ppa:webupd8team/java
+        state: present
+    - name: install tomcat8
+      apt:
+        name: tomcat8
+        update_cache: yes           
+        state: present
+    - name: enable and restart tomcat8
+      service:
+        name: tomcat8
+        enabled: yes
+        state: restarted
+    - name: instal open-jdk8
+      yum:
+        name: open-jdk8
+        state: present
+    - name: install tomcat8
+      yum_repository:
+        repo: ppa:webupd8team/java
+        state: present
+    - name: enable and restart tomcat8
+      service:
+        name: tomcat8
+        enabled: yes
+        state: restarted

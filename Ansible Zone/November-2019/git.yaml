@@ -1,0 +1,21 @@
+- hosts: all
+  become: yes
+  tasks:
+  - name: update ubuntu packages and install git
+    apt:
+      name: git
+      update_cache: yes
+      state: present
+  - name: update ubuntu packages and install tree
+    apt:
+      name: tree
+      update_cache: yes
+      state: present
+  - name: update centos packages and install git
+    yum:
+      name: git
+      state: present
+  - name: update centos packages and install tree
+    apt:
+      name: tree
+      state: present
