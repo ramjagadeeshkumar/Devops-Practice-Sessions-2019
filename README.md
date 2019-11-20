@@ -1,4 +1,4 @@
-#### Devops-Practice-Sessions-2019
+#### All Devops-Practice-Sessions of 2019 should be posted here for the reference.
  * Packer
  * Terraform
  * Docker
