@@ -1,0 +1,28 @@
+{
+    "variables" : {
+        "aws_access_key" : "",
+        "aws_secret_key" : ""
+    },
+
+    "buildres" : [
+        {
+            "type" : "amazon-ebs",
+            "ami_name" : "packerawsimage",
+            "ami_description" : "thid is image is creating by aws platform for the first time",
+            "ami_virtualization_type" : "hvm",
+            "access_key" : "{{ user 'aws_acess_key'}}",
+            "regeion" : "ap-south-1",
+            "secret_key" : "{{ user 'aws_secret_key'}}",
+            "instance_type" : "t2.micro",
+            "source_ami" : "ami-guasipupgiouh"
+        }
+    ],
+
+    "provisioners" : [
+        {
+            "type" : "shell",
+            "script" : "./deploypetclinic.sh"
+            
+        }
+    ]
+}
