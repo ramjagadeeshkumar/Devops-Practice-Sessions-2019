@@ -1,0 +1,30 @@
+{
+    "variables" : {
+        "aws_access_key" : "",
+        "aws_secret_key" : "",
+        "aws_region" : ""
+
+    },
+
+    "buildres" : [
+        {
+            "type" : "amazon-ebs",
+            "ami_name" : "gameoflife-{{timestamp}}",
+            "ami_description" : "This ami is for creating game of life imge from packer",
+            "ami_virtualization_type" : "hvm",
+            "access_key" : "{{ user 'aws_access_key' }}",
+            "region" : "{{ user 'aws_regeion'}}",
+            "secret_key" : "{{ user 'aws_secret_key' }}",
+            "instance_type" : "t2.micro",
+            "source_ami" : "ami-hkdfiwpegjhueh",
+            "ssh_username": "ubuntu"
+
+        }
+    ],
+
+    "provisionres" : {
+        "type" : "shell",
+        "inline" : "./gameoflife.sh"
+    }
+
+}
