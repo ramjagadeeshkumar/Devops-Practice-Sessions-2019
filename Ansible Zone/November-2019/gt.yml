@@ -1,0 +1,9 @@
+--- 
+- hosts : all
+  become : yes
+  tasks :
+    - name : installing git
+      package :
+        name : git
+        update_cache : yes
+        state : present

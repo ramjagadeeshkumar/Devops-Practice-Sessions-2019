@@ -1,0 +1,14 @@
+---
+- hosts : all
+  become : yes
+  tasks: 
+    - name : intsalling maven latest version in ubuntu
+      apt :
+        name : maven
+        update_cache : yes
+        state : latest
+    - name : instlling maven latest version in centos
+      yum :
+        name : maven
+        update_cache : yes
+        state : latest

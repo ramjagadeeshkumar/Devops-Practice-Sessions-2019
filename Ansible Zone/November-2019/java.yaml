@@ -1,0 +1,14 @@
+---
+- hosts : all
+  become : yes
+  tasks :
+    - name : intsalling chocaletey in ubuntu
+      package:
+        name: choco
+        update_cache : yes
+        state : present
+    - name : uninstalling chocalatey in ubuntu
+      package :
+        name: choco
+        update_cache : yes
+        state: absent

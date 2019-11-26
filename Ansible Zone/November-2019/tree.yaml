@@ -1,0 +1,15 @@
+---
+- hosts: all
+  become : yes
+  tasks:
+    - name : installing tree in ubuntu
+      package : 
+        name : tree
+        update_cache : yes
+        state : present
+
+    - name : uninstalling tree from ubuntu
+      package:
+        name: tree
+        update_cache : yes
+        state : absent

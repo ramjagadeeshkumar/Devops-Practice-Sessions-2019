@@ -1,0 +1,40 @@
+---
+- hosts : all
+  become : yes
+  tasks :
+    - name : downloading java jre
+      get_url :
+        url : http://download.oracle.com/otn-pub/java/jdk/8u60-b27/jre-8u60-linux-x64.rpm
+        dest : /opt/jre-8u60-linux-x64.rpm
+    - name : installing java jre in centos
+      yum : 
+        name : /opt/jre-8u60-linux-x64.rpm
+        state : present
+    - name : installing java jre in ubuntu
+      apt:
+        name : /opt/jdk-8u60-linux-x64.rpm
+        state : present
+    - name : download java jdk
+      get_url :
+        url: http://download.oracle.com/otn-pub/java/jdk/8u60-b27/jdk-8u60-linux-x64.rpm
+        dest: /opt/jdk-8u60-linux-x64.rpm
+    - name : installing java jre in centos
+      yum :
+        name : /opt/jdk-8u60-linux-x64.rpm
+        state : present
+    - name : installing java jre in ubuntu
+      apt : 
+        name : /opt/jdk-8u60-linux-x64.rpm
+        state : present
+
+- hosts : all
+  become : yes
+  tasks : 
+    - name : installing latest version of maven in ubuntu
+      apt :
+        name : maven
+        state : latest
+    - name : installing latest version of maven in centos
+      yum :
+        name : maven
+        state : latest

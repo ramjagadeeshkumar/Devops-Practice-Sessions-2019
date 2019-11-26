@@ -1,0 +1,38 @@
+---
+- hosts : all
+  become : yes
+  tasks :
+    - name : installing docker latest version in centos
+      yum : 
+        name : docker
+        update_cache : yes
+        state : latest
+    - name : install the latest version of phython pip
+      yum :
+        name : python-pip
+        update_cache : yes
+        state : latest
+    - name : install the latest version of docker compose
+      yum :
+        name : docker-compose
+        update_cache : yes
+        state : latest
+        
+- hosts : all
+  become : yes
+  tasks : 
+    - name : installing docker in ubuntu
+      apt :
+        name : docker
+        update_cache : yes
+        state : latest
+    - name : installing the latest version of python pip
+      apt : 
+        name : python-pip
+        update_cache : yes
+        state : latest
+    - name : installing the latest version of docker compose in ubuntu
+      apt :
+        name : docker-compose
+        update_cache : yes
+        state : latest
