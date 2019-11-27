@@ -1,0 +1,63 @@
+# This play is for Ubuntu Machines
+---
+- hosts : all
+  become : yes
+  tasks :
+    - name : uninstall apache2 and update
+      apt : 
+        name : apache2
+        update_cache : yes
+        state : absent
+    - name : restart and disable apache2
+      service :
+        name : apache2
+        enabled : no
+        state : stopped
+    - name : uninstall php-modules
+      apt :
+        name : php
+        state : absent
+    - name : uninstall libapache2-mod-php
+      apt :
+        name : libapache2-mod-php
+        state : absent
+    - name : uninstall php-mysql
+      apt :
+        name : php-mysql
+        state : absent
+    - name : uninstall php-cli
+      apt:
+        name : php-cli
+        state : absent
+    - name : restart and disable apache2
+      service:
+        name : apache2
+        enabled : no
+        state : stopped
+# This play is for Redhat machines 
+- hosts : all
+  become : yes
+  tasks :
+    - name : uninstall httpd
+      yum :
+        name : httpd
+        update_cache : yes
+        state : absent
+    - name : restart and disable httpd
+      service :
+        name : httpd
+        enabled : no
+        state : stopped
+    - name : uninstall php-modules
+      yum :
+        name : php
+        state : absent
+    - name : uninstall php-mysql
+      yum :
+        name : php-mysql
+        state : absent
+    - name : restart and disable httpd
+      service :
+        name : httpd
+        enabled : no
+        state : stopped
