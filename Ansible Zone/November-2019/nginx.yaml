@@ -1,0 +1,20 @@
+---
+- hosts : all
+  become : yes
+  tasks :
+    - name : install nginx
+      apt :
+        name : nginx
+        state : latest
+        autoclean : yes
+    - name : install openjdk-8-jdk
+      apt :
+        name : openjdk-8-jdk
+        state : present
+        autoclean : yes
+    - name : install nginx
+      yum :
+        - nginx
+        - postgresql
+        - postgresql-server
+      state: present

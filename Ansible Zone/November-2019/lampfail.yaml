@@ -1,0 +1,59 @@
+---
+- hosts : all
+  become : yes
+  tasks :
+    - name : fail if it is unsupported
+      fail :
+        - msg : This playbook is supported only on redhat and debain variants
+      when : ansible_facts ['os_family'] == 'Debian' or ansible_facts ['os_family'] == 'RedHat'
+    - name : install apache2
+      package :
+        name : ""{{ package_name}}""
+        state : present
+      notify :
+        - restart and enable apache2
+    - name : printing php modules
+      debug :
+        var : php-modules
+    - name : install php-modules
+      package :
+        name : ""{{ item }}""
+        state : present
+      loop : ""{{ php-modules}}""
+    - name: copy the home page
+      copy:
+        src: info.php
+        dest: /var/www/html/info.php
+      notify:
+        - restart and enable apache
+    #- name: Download info php page
+    #  get_url:
+    #    url: https://qt-s3-new-testing.s3-us-west-2.amazonaws.com/info.php
+    #    dest: /var/www/html/info.php
+    #  notify:
+    #    - restart and enable apache
+  handlers:
+    - name: restart and enable apache
+      service:
+        name: "{{ package_name }}"
+        enabled: yes
+        state: restarted
+
+
+#### Inventory file will be like
+all
+  children
+    webservers
+      hosts
+        <ip-adress>
+          package_name : ubuntu
+          php-modules
+            - php
+            - libapache2-mod-php
+            - php-mysql
+            - php-cli
+        <ip-adress>
+        package_name : httpd
+        php-modules
+          - php
+          - php-mysql 

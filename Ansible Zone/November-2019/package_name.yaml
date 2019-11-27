@@ -1,0 +1,36 @@
+---
+- hosts : all
+  become : yes
+  tasks :
+    - name : install apache2
+      package:
+       name : {{package_name}}
+       state : present
+      notify :
+        - restart and enable apache2
+      when : ansible_facts ['os_family'] == 'Debian' or ansible_facts ['os_family'] == 'RedHat'
+  handleres :
+    - name : restart and enable apache
+      service :
+        name : {{ package_name }}
+        enabled : yes
+        state : restarted
+      when : ansible_facts ['os_family'] == 'Debian' or ansible_facts ['os_family'] == 'RedHat'
+
+# Inventory file like be
+all
+  children
+    webservers
+      hosts
+        <ip-adress>
+          package_name : ubuntu
+          php-modules
+            - php
+            - libapache2-mod-php
+            - php-mysql
+            - php-cli
+        <ip-adress>
+        package_name : httpd
+        php-modules
+          - php
+          - php-mysql 

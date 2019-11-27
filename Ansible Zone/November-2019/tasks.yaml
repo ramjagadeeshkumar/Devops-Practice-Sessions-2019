@@ -1,0 +1,16 @@
+---
+- hosts : all
+  become : yes
+  pretasks :
+    - name : write a msg
+      debug :
+        msg : "Starting Execution of Playbook"
+  tasks :
+    - name : install git
+      apt :
+        name : git
+        state : present
+  posttasks :
+    - name : write a msg
+      debug :
+        msg : playbook execution completd 
