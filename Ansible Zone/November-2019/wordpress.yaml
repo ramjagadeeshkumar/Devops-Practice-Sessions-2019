@@ -1,0 +1,6 @@
+---
+- hosts : all
+  bcome : yes
+  roles :
+    - role : oefenweb.wordpress
+      

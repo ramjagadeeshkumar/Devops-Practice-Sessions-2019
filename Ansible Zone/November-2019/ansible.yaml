@@ -1,0 +1,10 @@
+---
+- hosts : all
+  become : yes
+  tasks :
+    - name : installing any software
+      package :
+        name : software name
+        update_cache : yes
+        state : present (or) absent
+        
