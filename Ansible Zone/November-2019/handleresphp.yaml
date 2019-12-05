@@ -11,13 +11,13 @@
     - name : install php
       apt : 
         name : php
-        state: present
+        state : present
     - name : install libapache2-mod-php
-      apt: 
+      apt : 
         name : libapache2-mod-php
         state : present
     - name : install php-mysql
-      apt:
+      apt :
         name : php-mysql
         state : present
     - name : install php-cli
