@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: replica-example
+  labels : 
+    app : guestbook
+    tier : frontend
+spec :
+  replicas : 5
+  selector :
+    matchlabels :
+      tier : frontend
+  template :
+    metadata :
+      labels :
+        tier : frontend
+    spec :
+      containers:
+        - name : php-redis
+          image: gcr.io/google_samples/gb-frontend:v3
+          port : 8080
+
+  
