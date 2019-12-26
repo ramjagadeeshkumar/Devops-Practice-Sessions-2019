@@ -1,0 +1,40 @@
+node('K8snode') {
+
+    stage ('workspace') {
+        ws('/home/jenkins/venky')
+    }
+
+    stage ('Delete previous workspace') {
+        deleteDir()
+    }
+
+    stage ('Git') {
+        git 'https://github.com/spring-projects/spring-petclinic.git'
+    }
+
+    stage ('Package') {
+        sh 'mvn package'
+    }
+
+    stage ('Archive Artifact') {
+        archiveArtifacts 'target/*.jar'
+    }
+
+    stage ('Publish Junit test') {
+        junit 'target/surefire-reports/*.xml'
+    }
+
+    stage ('Build Sucess') {
+        echo 'Build Sucess'
+    }
+
+    stage ('Sending mail') {
+        mail bcc: '', body: '''Hi,
+
+Build is Sucessfully done!
+
+Regards,
+Build and Release team''', cc: 'yakkala.vamshikrishna@gmail.com', from: '', replyTo: '', subject: 'Build Reports', to: 'bvenky811.1@gmail.com'
+    }
+
+}
